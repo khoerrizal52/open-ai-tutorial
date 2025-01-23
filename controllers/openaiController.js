@@ -23,4 +23,20 @@ const generateMeta = async (title) => {
     console.log(description.choices[0].message.content)
 }
 
-module.exports = { generateMeta }
+const testQuestion = async (question) => {
+    const description = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+            { role: "developer", content: "You are an IELTS examiner" },
+            {
+                role: 'user',
+                content: question
+            }
+        ],
+        max_tokens: 100
+    })
+
+    console.log(description.choices[0].message.content)
+}
+
+module.exports = { generateMeta, testQuestion }
